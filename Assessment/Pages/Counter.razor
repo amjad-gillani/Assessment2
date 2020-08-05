@@ -1,0 +1,83 @@
+﻿@page "/counter"
+
+
+<h1>Bee</h1>
+
+<p>Current Status: @Status</p>
+<table>
+    <thead>
+        <tr>
+            <th width="20%">Bee Name</th>
+            <th width="50%">Demage Value(1-99)</th>
+            <th width="20">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Worker</td>
+            <td><input typeof="number" @bind-value="Demagew" class="form-control" placeholder="Enter Demage Value" required max="99" min="1" maxlength="2"  /></td>
+            <td><button class="btn btn-primary" @onclick="ChechStatusW">Check </button></td>
+        </tr>
+        <tr>
+            <td>Queen</td>
+            <td><input type="number" id="q"  @bind-value="Demageq" class="form-control" placeholder="Enter Demage Value"  required max="99" min="1" maxlength="2" /></td>
+            <td><button class="btn btn-primary" @onclick="ChechStatusQ">Check </button></td>
+        </tr>
+        <tr>
+            <td>Drone</td>
+            <td><input type="number" @bind-value="Demaged" class="form-control" placeholder="Enter Demage Value"   required max="99" maxlength="2" /></td>
+            <td><button class="btn btn-primary" @onclick="ChechStatusD">Check </button></td>
+        </tr>
+    </tbody>
+</table>
+
+
+@code {
+
+
+    string Status = "Alive";
+    int Demagew = 0;
+    int Demageq = 0;
+    int Demaged = 0;
+
+    private void ChechStatusW()
+    {
+        Worker wr = new Worker();
+
+        if (wr.Demage(Demagew) == 70)
+        {
+            Status = "Dead";
+        }
+        else
+        {
+            Status = "Alive";
+        }
+    }
+    private void ChechStatusQ()
+    {
+        Queen qr = new Queen();
+
+        if (qr.Demage(Demageq) == 20)
+        {
+            Status = "Dead";
+        }
+        else
+        {
+            Status = "Alive";
+        }
+    }
+    private void ChechStatusD()
+    {
+        Drone dr = new Drone();
+
+        if (dr.Demage(Demaged) == 50)
+        {
+            Status = "Dead";
+        }
+        else
+        {
+            Status = "Alive";
+        }
+    }
+}
+
